@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { AppServiceMap, AuthService } from "../../contract/service.contract";
 import { BaseController } from "./base.controller";
-import { UsersRegister_Paayload } from "../dto/auth.dto";
+import { UsersRegister_Payload } from "../dto/auth.dto";
 import { WrapAppHandler } from "../../handler/default.handler";
 import { validate } from "../validate";
 import { AuthValidator } from "../validate/auth.validator";
@@ -22,7 +22,7 @@ export class AuthController extends BaseController {
     }
 
     postCreateUsers = async (req: Request): Promise<unknown> => {
-        const payload = req.body as UsersRegister_Paayload;
+        const payload = req.body as UsersRegister_Payload;
 
         validate(AuthValidator.RegisterUsers_Payload, payload);
 

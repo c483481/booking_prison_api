@@ -29,7 +29,7 @@ class JwtModule {
     };
 
     issueWithAudience = (data: UserAuthToken, audience: string): JwtResult => {
-        const token = sign({ data }, this.jwtKey, {
+        const token = sign({ data: { xid: data.xid, username: data.username } }, this.jwtKey, {
             expiresIn: this.jwtLifeTime,
             audience: audience,
         });
