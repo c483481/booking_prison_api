@@ -8,4 +8,6 @@ export interface UsersRepository {
     createUsers(payload: UsersCreationAttributes): Promise<UsersAttributes>;
 
     findByUsername(username: string): Promise<UsersAttributes | null>;
+
+    updateUsers(id: number, updateValue: Partial<UsersAttributes>, version: number): Promise<number>;
 }

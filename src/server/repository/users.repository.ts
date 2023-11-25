@@ -20,4 +20,15 @@ export class SequelizeUsersRepository extends BaseRepository implements UsersRep
             },
         });
     };
+
+    updateUsers = async (id: number, updateValue: Partial<UsersAttributes>, version: number): Promise<number> => {
+        const update = await this.users.update(updateValue, {
+            where: {
+                id,
+                version,
+            },
+        });
+
+        return update[0];
+    };
 }
