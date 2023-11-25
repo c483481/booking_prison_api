@@ -10,4 +10,6 @@ export interface UsersRepository {
     findByUsername(username: string): Promise<UsersAttributes | null>;
 
     updateUsers(id: number, updateValue: Partial<UsersAttributes>, version: number): Promise<number>;
+
+    findByXid(xid: string): Promise<UsersAttributes | null>;
 }
