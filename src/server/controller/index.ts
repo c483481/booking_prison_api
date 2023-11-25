@@ -4,10 +4,12 @@ import { BaseController } from "./base.controller";
 import { limiter } from "../../handler/limitter.handler";
 import { AuthController } from "./auth.controller";
 import { UsersController } from "./users.controller";
+import { BookingController } from "./booking.controller";
 
 export class Controller {
     private readonly auth: AuthController = new AuthController();
     private readonly users: UsersController = new UsersController();
+    private readonly booking: BookingController = new BookingController();
 
     init(service: AppServiceMap): Router {
         const router = Router();
