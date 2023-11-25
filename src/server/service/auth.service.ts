@@ -32,6 +32,22 @@ export class Auth extends BaseService implements AuthService {
         return composeUsers(result);
     };
 
+    registerPenjaga = async (payload: UsersRegister_Payload): Promise<UsersResult> => {
+        const { username, password } = payload;
+
+        const newPassword = await bcryptModule.hash(password);
+
+        const createdValue = createData<UsersCreationAttributes>({
+            username,
+            password: newPassword,
+            role: "PJG",
+        });
+
+        const result = await this.usersRepo.createUsers(createdValue);
+
+        return composeUsers(result);
+    };
+
     loginUsers = async (payload: AuthLogin_Payload): Promise<LoginResult> => {
         const { username, password } = payload;
 

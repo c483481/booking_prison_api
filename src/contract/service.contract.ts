@@ -8,5 +8,7 @@ export interface AppServiceMap {
 export interface AuthService {
     registerUser(payload: UsersRegister_Payload): Promise<UsersResult>;
 
+    registerPenjaga(payload: UsersRegister_Payload): Promise<UsersResult>;
+
     loginUsers(payload: AuthLogin_Payload): Promise<LoginResult>;
 }
