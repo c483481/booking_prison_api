@@ -1,8 +1,9 @@
 import { AuthLogin_Payload, LoginResult, UsersRegister_Payload } from "../server/dto/auth.dto";
-import { UsersResult } from "../server/dto/users.dto";
+import { ChangePassword_Payload, UsersResult } from "../server/dto/users.dto";
 
 export interface AppServiceMap {
     auth: AuthService;
+    users: UsersService;
 }
 
 export interface AuthService {
@@ -11,4 +12,8 @@ export interface AuthService {
     registerPenjaga(payload: UsersRegister_Payload): Promise<UsersResult>;
 
     loginUsers(payload: AuthLogin_Payload): Promise<LoginResult>;
+}
+
+export interface UsersService {
+    changePassword(payload: ChangePassword_Payload): Promise<void>;
 }

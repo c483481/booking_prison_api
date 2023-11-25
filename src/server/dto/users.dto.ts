@@ -5,3 +5,8 @@ export interface UsersResult extends BaseResult {
     tagRole: string;
     role: string | null;
 }
+
+export interface ChangePassword_Payload {
+    password: string;
+    userXid: string;
+}
