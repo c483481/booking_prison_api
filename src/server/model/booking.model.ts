@@ -47,7 +47,6 @@ export class Booking extends Model<BookingAttributes, BookingCreationAttributes>
                 name: {
                     type: DataTypes.STRING(255),
                     allowNull: false,
-                    unique: true,
                 },
                 alamat: {
                     type: DataTypes.STRING(255),

@@ -18,7 +18,6 @@ module.exports = {
             name: {
                 type: Sequelize.STRING(255),
                 allowNull: false,
-                unique: true,
             },
             alamat: {
                 type: Sequelize.STRING(255),
