@@ -30,6 +30,7 @@ export class Booking extends BaseService implements BookingService {
                 alamat,
                 noTelp,
                 clear: false,
+                userXid: userSession.xid,
             },
             userSession
         );
