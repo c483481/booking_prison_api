@@ -43,4 +43,6 @@ export interface CellService {
 
 export interface NapiService {
     createNapi(payload: NapiCreation_Payload): Promise<NapiResult>;
+
+    listNapi(payload: List_Payload): Promise<ListResult<NapiResult>>;
 }
