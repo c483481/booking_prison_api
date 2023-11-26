@@ -4,7 +4,7 @@ import { BaseController } from "./base.controller";
 import { BookingCreation_Payload } from "../dto/booking.dto";
 import { validate } from "../validate";
 import { BookingValidate } from "../validate/booking.validatte";
-import { getForceUsersSession } from "../../utils/helper.utils";
+import { getForceUsersSession, getListOption } from "../../utils/helper.utils";
 import { defaultMiddleware } from "../../utils/middleware-helper.utils";
 import { WrapAppHandler } from "../../handler/default.handler";
 
@@ -20,6 +20,8 @@ export class BookingController extends BaseController {
 
     initRoute(): void {
         this.router.post("/", defaultMiddleware(), WrapAppHandler(this.postCreateBooking));
+
+        this.router.get("/", defaultMiddleware(), WrapAppHandler(this.getListBooking));
     }
 
     postCreateBooking = async (req: Request): Promise<unknown> => {
@@ -32,6 +34,14 @@ export class BookingController extends BaseController {
         payload.userSession = userSession;
 
         const result = await this.service.createBooking(payload);
+
+        return result;
+    };
+
+    getListBooking = async (req: Request): Promise<unknown> => {
+        const payload = getListOption(req);
+
+        const result = await this.service.listBooking(payload);
 
         return result;
     };
