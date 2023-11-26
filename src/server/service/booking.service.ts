@@ -8,6 +8,7 @@ import { compose, composeResult, createData, updateData } from "../../utils/help
 import { BookingCreation_Payload, BookingResult } from "../dto/booking.dto";
 import { BookingAttributes, BookingCreationAttributes } from "../model/booking.model";
 import { BaseService } from "./base.service";
+import { DateTime } from "luxon";
 
 export class Booking extends BaseService implements BookingService {
     private bookingRepo!: BookingRepository;
@@ -22,11 +23,15 @@ export class Booking extends BaseService implements BookingService {
             throw errorResponses.getError("E_REQ_1");
         }
 
+        const dateString = date.toString();
+
+        const dateContract = DateTime.fromISO(dateString);
+
         const createdValues = createData<BookingCreationAttributes>(
             {
                 name,
                 noKtp,
-                bookingDate: date,
+                bookingDate: dateContract.set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).toJSDate(),
                 sesi,
                 barang,
                 alamat,
