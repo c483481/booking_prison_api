@@ -68,6 +68,19 @@ export class SequelizeBookingRepository extends BaseRepository implements Bookin
         });
     };
 
+    findAllBookingToday = async (): Promise<BookingAttributes[]> => {
+        const now = DateTime.local().plus({ day: 1 }).set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+        const previous = now.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+        return this.booking.findAll({
+            where: {
+                bookingDate: {
+                    [Op.lte]: now.toJSDate().toISOString(),
+                    [Op.gte]: previous.toJSDate().toISOString(),
+                },
+            },
+        });
+    };
+
     updateBooking = async (id: number, updateValue: Partial<BookingAttributes>, version: number): Promise<number> => {
         const result = await this.booking.update(updateValue, {
             where: {

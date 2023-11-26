@@ -25,4 +25,6 @@ export interface BookingRepository {
     updateBooking(id: number, updateValue: Partial<BookingAttributes>, version: number): Promise<number>;
 
     findByXid(xid: string): Promise<BookingAttributes | null>;
+
+    findAllBookingToday(): Promise<BookingAttributes[]>;
 }
