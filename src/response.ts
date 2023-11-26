@@ -49,6 +49,11 @@ export function initErrorResponse() {
             success: false,
             message: "Duplicate Recource",
         },
+        E_REC_2: {
+            status: 400,
+            success: false,
+            message: "Recource Maximum",
+        },
         E_ERR_1: {
             status: 400,
             success: false,

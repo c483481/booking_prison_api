@@ -2,6 +2,7 @@ import { GetDetail_Payload, ListResult, List_Payload, UserSession } from "../mod
 import { AuthLogin_Payload, LoginResult, UsersRegister_Payload } from "../server/dto/auth.dto";
 import { BookingCreation_Payload, BookingResult } from "../server/dto/booking.dto";
 import { CellCreation_Payload, CellResult } from "../server/dto/cell.dto";
+import { NapiCreation_Payload, NapiResult } from "../server/dto/napi.dto";
 import { ChangePassword_Payload, UsersResult } from "../server/dto/users.dto";
 
 export interface AppServiceMap {
@@ -9,6 +10,7 @@ export interface AppServiceMap {
     users: UsersService;
     booking: BookingService;
     cell: CellService;
+    napi: NapiService;
 }
 
 export interface AuthService {
@@ -37,4 +39,8 @@ export interface CellService {
     createCell(payload: CellCreation_Payload): Promise<CellResult>;
 
     getListCell(payload: List_Payload): Promise<ListResult<CellResult>>;
+}
+
+export interface NapiService {
+    createNapi(payload: NapiCreation_Payload): Promise<NapiResult>;
 }
