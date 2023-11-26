@@ -41,6 +41,8 @@ export interface CellRepository {
     findCell(payload: List_Payload): Promise<FindResult<CellAttributes>>;
 
     findCellByXid(xid: string): Promise<CellAttributes | null>;
+
+    updateCell(id: number, updateValues: Partial<CellAttributes>, version: number): Promise<number>;
 }
 
 export interface NapiRepository {

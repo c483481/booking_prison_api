@@ -46,6 +46,17 @@ export class SequelizeCellRepository extends BaseRepository implements CellRepos
         });
     };
 
+    updateCell = async (id: number, updateValues: Partial<CellAttributes>, version: number): Promise<number> => {
+        const result = await this.cell.update(updateValues, {
+            where: {
+                id,
+                version,
+            },
+        });
+
+        return result[0];
+    };
+
     parseSortBy = (sortBy: string): { order: Order } => {
         // determine sorting option
         let order: Order;
