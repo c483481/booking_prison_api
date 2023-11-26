@@ -21,4 +21,6 @@ export interface BookingRepository {
     insertBooking(payload: BookingCreationAttributes): Promise<BookingAttributes>;
 
     findBooking(payload: List_Payload): Promise<FindResult<BookingAttributes>>;
+
+    updateBooking(id: number, updateValue: Partial<BookingAttributes>, version: number): Promise<number>;
 }

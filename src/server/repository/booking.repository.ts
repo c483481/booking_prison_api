@@ -50,6 +50,17 @@ export class SequelizeBookingRepository extends BaseRepository implements Bookin
         });
     };
 
+    updateBooking = async (id: number, updateValue: Partial<BookingAttributes>, version: number): Promise<number> => {
+        const result = await this.booking.update(updateValue, {
+            where: {
+                id,
+                version,
+            },
+        });
+
+        return result[0];
+    };
+
     parseSortBy = (sortBy: string): { order: Order } => {
         // determine sorting option
         let order: Order;
