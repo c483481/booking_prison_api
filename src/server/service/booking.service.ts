@@ -1,8 +1,9 @@
 import { AppRepositoryMap, BookingRepository } from "../../contract/repository.contract";
 import { BookingService } from "../../contract/service.contract";
+import { ListResult, List_Payload } from "../../module/dto.module";
 import { errorResponses } from "../../response";
 import { toUnixEpoch } from "../../utils/date.utils";
-import { composeResult, createData } from "../../utils/helper.utils";
+import { compose, composeResult, createData } from "../../utils/helper.utils";
 import { BookingCreation_Payload, BookingResult } from "../dto/booking.dto";
 import { BookingAttributes, BookingCreationAttributes } from "../model/booking.model";
 import { BaseService } from "./base.service";
@@ -38,6 +39,17 @@ export class Booking extends BaseService implements BookingService {
         const result = await this.bookingRepo.insertBooking(createdValues);
 
         return composeBooking(result);
+    };
+
+    listBooking = async (payload: List_Payload): Promise<ListResult<BookingResult>> => {
+        const result = await this.bookingRepo.findBooking(payload);
+
+        const items = compose(result.rows, composeBooking);
+
+        return {
+            items,
+            count: result.count,
+        };
     };
 }
 

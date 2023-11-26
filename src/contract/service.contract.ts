@@ -1,3 +1,4 @@
+import { ListResult, List_Payload } from "../module/dto.module";
 import { AuthLogin_Payload, LoginResult, UsersRegister_Payload } from "../server/dto/auth.dto";
 import { BookingCreation_Payload, BookingResult } from "../server/dto/booking.dto";
 import { ChangePassword_Payload, UsersResult } from "../server/dto/users.dto";
@@ -22,4 +23,6 @@ export interface UsersService {
 
 export interface BookingService {
     createBooking(payload: BookingCreation_Payload): Promise<BookingResult>;
+
+    listBooking(payload: List_Payload): Promise<ListResult<BookingResult>>;
 }
