@@ -1,13 +1,14 @@
 import { DateTime } from "luxon";
 import { AppRepositoryMap, CellRepository, NapiRepository } from "../../contract/repository.contract";
 import { errorResponses } from "../../response";
-import { compose, composeResult, createData } from "../../utils/helper.utils";
+import { compose, composeResult, createData, updateData } from "../../utils/helper.utils";
 import { NapiCreation_Payload, NapiResult } from "../dto/napi.dto";
 import { BaseService } from "./base.service";
 import { NapiAttributes, NapiCreationAttributes } from "../model/napi.model";
 import { toUnixEpoch } from "../../utils/date.utils";
 import { NapiService } from "../../contract/service.contract";
 import { ListResult, List_Payload } from "../../module/dto.module";
+import { CellAttributes } from "../model/cell.model";
 
 export class Napi extends BaseService implements NapiService {
     private napiRepo!: NapiRepository;
@@ -49,7 +50,18 @@ export class Napi extends BaseService implements NapiService {
             userSession
         );
 
-        const result = await this.napiRepo.insertNapi(createdValues);
+        const updateValues = updateData<CellAttributes>(
+            cell,
+            {
+                count: cell.count + 1,
+            },
+            userSession
+        );
+
+        const [result] = await Promise.all([
+            this.napiRepo.insertNapi(createdValues),
+            this.cellRepo.updateCell(cell.id, updateValues, cell.version),
+        ]);
 
         return composeNapi(result);
     };
