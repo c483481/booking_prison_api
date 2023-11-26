@@ -1,12 +1,14 @@
 import { FindResult, List_Payload } from "../module/dto.module";
 import { BookingAttributes, BookingCreationAttributes } from "../server/model/booking.model";
 import { CellAttributes, CellCrationAttributes } from "../server/model/cell.model";
+import { NapiAttributes, NapiCreationAttributes } from "../server/model/napi.model";
 import { UsersAttributes, UsersCreationAttributes } from "../server/model/users.model";
 
 export interface AppRepositoryMap {
     users: UsersRepository;
     booking: BookingRepository;
     cell: CellRepository;
+    napi: NapiRepository;
 }
 
 export interface UsersRepository {
@@ -37,4 +39,8 @@ export interface CellRepository {
     insertCell(payload: CellCrationAttributes): Promise<CellAttributes>;
 
     findCell(payload: List_Payload): Promise<FindResult<CellAttributes>>;
+}
+
+export interface NapiRepository {
+    insertNapi(payload: NapiCreationAttributes): Promise<NapiAttributes>;
 }
