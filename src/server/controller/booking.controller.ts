@@ -25,6 +25,8 @@ export class BookingController extends BaseController {
         this.router.get("/", defaultMiddleware(), WrapAppHandler(this.getListBooking));
 
         this.router.patch("/:xid", defaultMiddleware(Privilege.penjaga), WrapAppHandler(this.patchUpdateStatus));
+
+        this.router.put("/today/all", defaultMiddleware(Privilege.penjaga), WrapAppHandler(this.updateBookingToday));
     }
 
     postCreateBooking = async (req: Request): Promise<unknown> => {
@@ -53,6 +55,14 @@ export class BookingController extends BaseController {
         const payload = getDetailOption(req);
 
         await this.service.updateStatusBooking(payload);
+
+        return "success";
+    };
+
+    updateBookingToday = async (req: Request): Promise<unknown> => {
+        const userSession = getForceUsersSession(req);
+
+        await this.service.updateBookingToday(userSession);
 
         return "success";
     };
