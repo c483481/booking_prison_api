@@ -45,4 +45,6 @@ export interface CellRepository {
 
 export interface NapiRepository {
     insertNapi(payload: NapiCreationAttributes): Promise<NapiAttributes>;
+
+    findNapi(payload: List_Payload): Promise<FindResult<NapiAttributes>>;
 }
