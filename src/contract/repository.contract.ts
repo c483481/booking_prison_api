@@ -28,5 +28,5 @@ export interface BookingRepository {
 
     findAllBookingToday(): Promise<BookingAttributes[]>;
 
-    updateBulkBooking(payload: BookingCreationAttributes[]): Promise<void>;
+    updateBulkBooking(updateValue: Partial<BookingAttributes>): Promise<number>;
 }

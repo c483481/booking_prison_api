@@ -87,26 +87,15 @@ export class Booking extends BaseService implements BookingService {
     };
 
     updateBookingToday = async (userSession: UserSession): Promise<void> => {
-        const result = await this.bookingRepo.findAllBookingToday();
-        if (!result.length) {
-            return;
-        }
+        const updateValues: Partial<BookingAttributes> = {
+            clear: true,
+            updatedAt: new Date(),
+            modifiedBy: userSession,
+        };
 
-        const arrUpdateValues = result.reduce((acc: BookingCreationAttributes[], item) => {
-            const updateValues = updateData<BookingAttributes>(
-                item,
-                {
-                    clear: true,
-                },
-                userSession
-            );
+        const result = await this.bookingRepo.updateBulkBooking(updateValues);
 
-            Object.assign(item, updateValues);
-            acc.push(item);
-            return acc;
-        }, []);
-
-        await this.bookingRepo.updateBulkBooking(arrUpdateValues);
+        console.log(`updated ${result} rows booking`);
     };
 }
 

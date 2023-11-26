@@ -92,27 +92,20 @@ export class SequelizeBookingRepository extends BaseRepository implements Bookin
         return result[0];
     };
 
-    updateBulkBooking = async (payload: BookingCreationAttributes[]): Promise<void> => {
-        await this.booking.bulkCreate(payload, {
-            fields: [
-                "id",
-                "xid",
-                "modifiedBy",
-                "version",
-                "updatedAt",
-                "createdAt",
-                "name",
-                "alamat",
-                "noKtp",
-                "noTelp",
-                "barang",
-                "sesi",
-                "bookingDate",
-                "clear",
-                "userXid",
-            ],
-            updateOnDuplicate: ["clear", "version", "updatedAt", "modifiedBy"],
+    updateBulkBooking = async (updateValue: Partial<BookingAttributes>): Promise<number> => {
+        const now = DateTime.local().plus({ day: 1 }).set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+        const previous = now.minus({ day: 1 }).set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+        const result = await this.booking.update(updateValue, {
+            where: {
+                bookingDate: {
+                    [Op.lte]: now.toJSDate().toISOString(),
+                    [Op.gte]: previous.toJSDate().toISOString(),
+                },
+                clear: false,
+            },
         });
+
+        return result[0];
     };
 
     parseSortBy = (sortBy: string): { order: Order } => {
