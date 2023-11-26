@@ -1,3 +1,4 @@
+import { FindResult, List_Payload } from "../module/dto.module";
 import { BookingAttributes, BookingCreationAttributes } from "../server/model/booking.model";
 import { UsersAttributes, UsersCreationAttributes } from "../server/model/users.model";
 
@@ -18,4 +19,6 @@ export interface UsersRepository {
 
 export interface BookingRepository {
     insertBooking(payload: BookingCreationAttributes): Promise<BookingAttributes>;
+
+    findBooking(payload: List_Payload): Promise<FindResult<BookingAttributes>>;
 }
