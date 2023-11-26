@@ -35,4 +35,6 @@ export interface BookingService {
 
 export interface CellService {
     createCell(payload: CellCreation_Payload): Promise<CellResult>;
+
+    getListCell(payload: List_Payload): Promise<ListResult<CellResult>>;
 }
