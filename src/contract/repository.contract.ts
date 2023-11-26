@@ -27,4 +27,6 @@ export interface BookingRepository {
     findByXid(xid: string): Promise<BookingAttributes | null>;
 
     findAllBookingToday(): Promise<BookingAttributes[]>;
+
+    updateBulkBooking(payload: BookingCreationAttributes[]): Promise<void>;
 }
