@@ -87,7 +87,7 @@ export function composeBooking(row: BookingAttributes): BookingResult {
         name: row.name,
         alamat: row.alamat,
         noKtp: row.noKtp,
-        noTelp: row.noKtp,
+        noTelp: row.noTelp,
         clear: row.clear,
         sesi: row.sesi,
         barang: row.barang,
