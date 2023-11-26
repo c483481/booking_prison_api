@@ -1,9 +1,10 @@
-import { Order, WhereOptions } from "sequelize";
+import { Op, Order, WhereOptions } from "sequelize";
 import { BookingRepository } from "../../contract/repository.contract";
 import { AppDataSource } from "../../module/datasource.module";
 import { FindResult, List_Payload } from "../../module/dto.module";
 import { Booking, BookingAttributes, BookingCreationAttributes } from "../model/booking.model";
 import { BaseRepository } from "./base.repository";
+import { DateTime } from "luxon";
 
 export class SequelizeBookingRepository extends BaseRepository implements BookingRepository {
     private booking!: typeof Booking;
@@ -45,6 +46,15 @@ export class SequelizeBookingRepository extends BaseRepository implements Bookin
 
         if (filters.notClear) {
             where.clear = false;
+        }
+
+        if (filters.today) {
+            const now = DateTime.local();
+            const previous = now.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+            where.bookingDate = {
+                [Op.lte]: now.toJSDate().toISOString(),
+                [Op.gte]: previous.toJSDate().toISOString(),
+            };
         }
 
         // parsing sort option
