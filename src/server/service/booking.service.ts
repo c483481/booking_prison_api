@@ -1,7 +1,7 @@
 import { isValid } from "ulidx";
 import { AppRepositoryMap, BookingRepository } from "../../contract/repository.contract";
 import { BookingService } from "../../contract/service.contract";
-import { GetDetail_Payload, ListResult, List_Payload } from "../../module/dto.module";
+import { GetDetail_Payload, ListResult, List_Payload, UserSession } from "../../module/dto.module";
 import { errorResponses } from "../../response";
 import { toUnixEpoch } from "../../utils/date.utils";
 import { compose, composeResult, createData, updateData } from "../../utils/helper.utils";
@@ -84,6 +84,29 @@ export class Booking extends BaseService implements BookingService {
             items,
             count: result.count,
         };
+    };
+
+    updateBookingToday = async (userSession: UserSession): Promise<void> => {
+        const result = await this.bookingRepo.findAllBookingToday();
+        if (!result.length) {
+            return;
+        }
+
+        const arrUpdateValues = result.reduce((acc: BookingCreationAttributes[], item) => {
+            const updateValues = updateData<BookingAttributes>(
+                item,
+                {
+                    clear: true,
+                },
+                userSession
+            );
+
+            Object.assign(item, updateValues);
+            acc.push(item);
+            return acc;
+        }, []);
+
+        await this.bookingRepo.updateBulkBooking(arrUpdateValues);
     };
 }
 
