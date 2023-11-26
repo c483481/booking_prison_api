@@ -14,6 +14,7 @@ export interface BookingAttributes extends BaseSequelizeAttribute {
     sesi: string;
     bookingDate: Date;
     clear: boolean;
+    userXid: string;
 }
 
 export type BookingCreationAttributes = Optional<BookingAttributes, optionalSequelize>;
@@ -34,6 +35,7 @@ export class Booking extends Model<BookingAttributes, BookingCreationAttributes>
     sesi!: string;
     bookingDate!: Date;
     clear!: boolean;
+    userXid!: string;
 
     static initModels(sequelize: Sequelize): typeof Booking {
         return Booking.init(
@@ -74,6 +76,10 @@ export class Booking extends Model<BookingAttributes, BookingCreationAttributes>
                 },
                 clear: {
                     type: DataTypes.BOOLEAN,
+                    allowNull: false,
+                },
+                userXid: {
+                    type: DataTypes.STRING(26),
                     allowNull: false,
                 },
             },

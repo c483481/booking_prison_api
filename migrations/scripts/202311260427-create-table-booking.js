@@ -47,6 +47,10 @@ module.exports = {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
             },
+            userXid: {
+                type: Sequelize.STRING(26),
+                allowNull: false,
+            },
         });
     },
 
