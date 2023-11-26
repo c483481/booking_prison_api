@@ -5,11 +5,13 @@ import { limiter } from "../../handler/limitter.handler";
 import { AuthController } from "./auth.controller";
 import { UsersController } from "./users.controller";
 import { BookingController } from "./booking.controller";
+import { CellController } from "./cell.controller";
 
 export class Controller {
     private readonly auth: AuthController = new AuthController();
     private readonly users: UsersController = new UsersController();
     private readonly booking: BookingController = new BookingController();
+    private readonly cell: CellController = new CellController();
 
     init(service: AppServiceMap): Router {
         const router = Router();
