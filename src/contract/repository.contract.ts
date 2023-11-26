@@ -23,4 +23,6 @@ export interface BookingRepository {
     findBooking(payload: List_Payload): Promise<FindResult<BookingAttributes>>;
 
     updateBooking(id: number, updateValue: Partial<BookingAttributes>, version: number): Promise<number>;
+
+    findByXid(xid: string): Promise<BookingAttributes | null>;
 }

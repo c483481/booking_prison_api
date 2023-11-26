@@ -16,6 +16,14 @@ export class SequelizeBookingRepository extends BaseRepository implements Bookin
         return this.booking.create(payload);
     };
 
+    findByXid = async (xid: string): Promise<BookingAttributes | null> => {
+        return this.booking.findOne({
+            where: {
+                xid,
+            },
+        });
+    };
+
     findBooking = async (payload: List_Payload): Promise<FindResult<BookingAttributes>> => {
         // retrieve options
         const { filters, showAll, usersSession } = payload;
