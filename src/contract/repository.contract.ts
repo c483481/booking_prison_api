@@ -1,10 +1,12 @@
 import { FindResult, List_Payload } from "../module/dto.module";
 import { BookingAttributes, BookingCreationAttributes } from "../server/model/booking.model";
+import { CellAttributes, CellCrationAttributes } from "../server/model/cell.model";
 import { UsersAttributes, UsersCreationAttributes } from "../server/model/users.model";
 
 export interface AppRepositoryMap {
     users: UsersRepository;
     booking: BookingRepository;
+    cell: CellRepository;
 }
 
 export interface UsersRepository {
@@ -29,4 +31,8 @@ export interface BookingRepository {
     findAllBookingToday(): Promise<BookingAttributes[]>;
 
     updateBulkBooking(updateValue: Partial<BookingAttributes>): Promise<number>;
+}
+
+export interface CellRepository {
+    insertCell(payload: CellCrationAttributes): Promise<CellAttributes>;
 }
