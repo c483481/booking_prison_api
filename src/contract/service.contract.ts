@@ -1,12 +1,14 @@
 import { GetDetail_Payload, ListResult, List_Payload, UserSession } from "../module/dto.module";
 import { AuthLogin_Payload, LoginResult, UsersRegister_Payload } from "../server/dto/auth.dto";
 import { BookingCreation_Payload, BookingResult } from "../server/dto/booking.dto";
+import { CellCreation_Payload, CellResult } from "../server/dto/cell.dto";
 import { ChangePassword_Payload, UsersResult } from "../server/dto/users.dto";
 
 export interface AppServiceMap {
     auth: AuthService;
     users: UsersService;
     booking: BookingService;
+    cell: CellService;
 }
 
 export interface AuthService {
@@ -29,4 +31,8 @@ export interface BookingService {
     updateStatusBooking(payload: GetDetail_Payload): Promise<void>;
 
     updateBookingToday(userSession: UserSession): Promise<void>;
+}
+
+export interface CellService {
+    createCell(payload: CellCreation_Payload): Promise<CellResult>;
 }
