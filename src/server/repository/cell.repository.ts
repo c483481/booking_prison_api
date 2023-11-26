@@ -38,6 +38,14 @@ export class SequelizeCellRepository extends BaseRepository implements CellRepos
         });
     };
 
+    findCellByXid = async (xid: string): Promise<CellAttributes | null> => {
+        return this.cell.findOne({
+            where: {
+                xid,
+            },
+        });
+    };
+
     parseSortBy = (sortBy: string): { order: Order } => {
         // determine sorting option
         let order: Order;

@@ -39,6 +39,8 @@ export interface CellRepository {
     insertCell(payload: CellCrationAttributes): Promise<CellAttributes>;
 
     findCell(payload: List_Payload): Promise<FindResult<CellAttributes>>;
+
+    findCellByXid(xid: string): Promise<CellAttributes | null>;
 }
 
 export interface NapiRepository {
