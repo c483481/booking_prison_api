@@ -4,9 +4,10 @@ import { BaseController } from "./base.controller";
 import { BookingCreation_Payload } from "../dto/booking.dto";
 import { validate } from "../validate";
 import { BookingValidate } from "../validate/booking.validatte";
-import { getForceUsersSession, getListOption } from "../../utils/helper.utils";
+import { getDetailOption, getForceUsersSession, getListOption } from "../../utils/helper.utils";
 import { defaultMiddleware } from "../../utils/middleware-helper.utils";
 import { WrapAppHandler } from "../../handler/default.handler";
+import { Privilege } from "../../constant/privilege.constant";
 
 export class BookingController extends BaseController {
     private service!: BookingService;
@@ -22,6 +23,8 @@ export class BookingController extends BaseController {
         this.router.post("/", defaultMiddleware(), WrapAppHandler(this.postCreateBooking));
 
         this.router.get("/", defaultMiddleware(), WrapAppHandler(this.getListBooking));
+
+        this.router.patch("/:xid", defaultMiddleware(Privilege.penjaga), WrapAppHandler(this.patchUpdateStatus));
     }
 
     postCreateBooking = async (req: Request): Promise<unknown> => {
@@ -44,5 +47,13 @@ export class BookingController extends BaseController {
         const result = await this.service.listBooking(payload);
 
         return result;
+    };
+
+    patchUpdateStatus = async (req: Request): Promise<unknown> => {
+        const payload = getDetailOption(req);
+
+        await this.service.updateStatusBooking(payload);
+
+        return "success";
     };
 }
