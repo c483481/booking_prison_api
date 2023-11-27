@@ -45,6 +45,14 @@ export class SequelizeNapiRepository extends BaseRepository implements NapiRepos
         });
     };
 
+    findByXid = async (xid: string): Promise<NapiAttributes | null> => {
+        return this.napi.findOne({
+            where: {
+                xid,
+            },
+        });
+    };
+
     parseSortBy = (sortBy: string): { order: Order } => {
         // determine sorting option
         let order: Order;

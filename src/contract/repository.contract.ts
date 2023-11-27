@@ -51,6 +51,8 @@ export interface NapiRepository {
     insertNapi(payload: NapiCreationAttributes): Promise<NapiAttributes>;
 
     findNapi(payload: List_Payload): Promise<FindResult<NapiAttributes>>;
+
+    findByXid(xid: string): Promise<NapiAttributes | null>;
 }
 
 export interface AbsenRepository {
