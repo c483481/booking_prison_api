@@ -1,9 +1,10 @@
+import { DateTime } from "luxon";
 import { AbsenRepository } from "../../contract/repository.contract";
 import { AppDataSource } from "../../module/datasource.module";
 import { FindResult, List_Payload } from "../../module/dto.module";
 import { Absen, AbsenAttrribute, AbsenCreationAttribute } from "../model/absen.model";
 import { BaseRepository } from "./base.repository";
-import { Order, WhereOptions } from "sequelize";
+import { Op, Order, WhereOptions } from "sequelize";
 
 export class SequelizeAbsenRepository extends BaseRepository implements AbsenRepository {
     private absen!: typeof Absen;
@@ -32,6 +33,15 @@ export class SequelizeAbsenRepository extends BaseRepository implements AbsenRep
 
         if (filters.tema) {
             where.tema = filters.tema;
+        }
+
+        if (filters.today) {
+            const now = DateTime.local().plus({ day: 1 }).set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+            const previous = now.minus({ day: 1 }).set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+            where.createdAt = {
+                [Op.lte]: now.toJSDate().toISOString(),
+                [Op.gte]: previous.toJSDate().toISOString(),
+            };
         }
 
         // parsing sort option
