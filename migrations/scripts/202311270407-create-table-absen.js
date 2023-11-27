@@ -27,7 +27,7 @@ module.exports = {
                 allowNull: false,
             },
             tema: {
-                type: Sequelize.DATE,
+                type: Sequelize.STRING,
                 allowNull: false,
             },
         });

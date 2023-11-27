@@ -48,7 +48,7 @@ export class Absen extends Model<AbsenAttrribute, AbsenCreationAttribute> implem
                     allowNull: false,
                 },
                 tema: {
-                    type: DataTypes.DATE,
+                    type: DataTypes.STRING,
                     allowNull: false,
                 },
             },
