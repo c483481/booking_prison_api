@@ -9,3 +9,8 @@ export interface JadwalAttribute {
 }
 
 export type JadwalHariAttribute = "senin" | "selasa" | "rabu" | "kamis" | "jumat" | "sabtu" | "minggu";
+
+export interface JadwalChange_Payload {
+    hari: JadwalHariAttribute;
+    name: string;
+}

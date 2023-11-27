@@ -3,6 +3,7 @@ import { AbsenCreation_Payload, AbsenResult } from "../server/dto/absen.dto";
 import { AuthLogin_Payload, LoginResult, UsersRegister_Payload } from "../server/dto/auth.dto";
 import { BookingCreation_Payload, BookingResult } from "../server/dto/booking.dto";
 import { CellCreation_Payload, CellResult } from "../server/dto/cell.dto";
+import { JadwalAttribute, JadwalChange_Payload } from "../server/dto/jadwal.dto";
 import { NapiCreation_Payload, NapiResult } from "../server/dto/napi.dto";
 import { ChangePassword_Payload, UsersResult } from "../server/dto/users.dto";
 
@@ -13,6 +14,7 @@ export interface AppServiceMap {
     cell: CellService;
     napi: NapiService;
     absen: AbsenService;
+    jadwal: JadwalService;
 }
 
 export interface AuthService {
@@ -53,4 +55,10 @@ export interface AbsenService {
     createAbsen(payload: AbsenCreation_Payload): Promise<AbsenResult>;
 
     listAbsen(payload: List_Payload): Promise<ListResult<AbsenResult>>;
+}
+
+export interface JadwalService {
+    getJadwal(): JadwalAttribute;
+
+    setJadwal(payload: JadwalChange_Payload): void;
 }
