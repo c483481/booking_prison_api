@@ -57,4 +57,6 @@ export interface NapiRepository {
 
 export interface AbsenRepository {
     insertAbsen(payload: AbsenCreationAttribute): Promise<AbsenAttrribute>;
+
+    findAbsen(payload: List_Payload): Promise<FindResult<AbsenAttrribute>>;
 }
