@@ -7,6 +7,7 @@ import { UsersController } from "./users.controller";
 import { BookingController } from "./booking.controller";
 import { CellController } from "./cell.controller";
 import { NapiController } from "./napi.controller";
+import { AbsenController } from "./absen.controller";
 
 export class Controller {
     private readonly auth: AuthController = new AuthController();
@@ -14,6 +15,7 @@ export class Controller {
     private readonly booking: BookingController = new BookingController();
     private readonly cell: CellController = new CellController();
     private readonly napi: NapiController = new NapiController();
+    private readonly absen: AbsenController = new AbsenController();
 
     init(service: AppServiceMap): Router {
         const router = Router();
