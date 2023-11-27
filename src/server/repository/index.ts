@@ -1,4 +1,5 @@
 import {
+    AbsenRepository,
     AppRepositoryMap,
     BookingRepository,
     CellRepository,
@@ -6,6 +7,7 @@ import {
     UsersRepository,
 } from "../../contract/repository.contract";
 import { AppDataSource } from "../../module/datasource.module";
+import { SequelizeAbsenRepository } from "./absen.reposittory,";
 import { BaseRepository } from "./base.repository";
 import { SequelizeBookingRepository } from "./booking.repository";
 import { SequelizeCellRepository } from "./cell.repository";
@@ -17,6 +19,7 @@ export class Repository implements AppRepositoryMap {
     readonly booking: BookingRepository = new SequelizeBookingRepository();
     readonly cell: CellRepository = new SequelizeCellRepository();
     readonly napi: NapiRepository = new SequelizeNapiRepository();
+    readonly absen: AbsenRepository = new SequelizeAbsenRepository();
 
     init(datasource: AppDataSource) {
         Object.entries(this).forEach(([k, r]) => {

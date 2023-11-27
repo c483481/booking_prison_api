@@ -1,4 +1,5 @@
 import { FindResult, List_Payload } from "../module/dto.module";
+import { AbsenAttrribute, AbsenCreationAttribute } from "../server/model/absen.model";
 import { BookingAttributes, BookingCreationAttributes } from "../server/model/booking.model";
 import { CellAttributes, CellCrationAttributes } from "../server/model/cell.model";
 import { NapiAttributes, NapiCreationAttributes } from "../server/model/napi.model";
@@ -9,6 +10,7 @@ export interface AppRepositoryMap {
     booking: BookingRepository;
     cell: CellRepository;
     napi: NapiRepository;
+    absen: AbsenRepository;
 }
 
 export interface UsersRepository {
@@ -49,4 +51,8 @@ export interface NapiRepository {
     insertNapi(payload: NapiCreationAttributes): Promise<NapiAttributes>;
 
     findNapi(payload: List_Payload): Promise<FindResult<NapiAttributes>>;
+}
+
+export interface AbsenRepository {
+    insertAbsen(payload: AbsenCreationAttribute): Promise<AbsenAttrribute>;
 }
