@@ -51,4 +51,6 @@ export interface NapiService {
 
 export interface AbsenService {
     createAbsen(payload: AbsenCreation_Payload): Promise<AbsenResult>;
+
+    listAbsen(payload: List_Payload): Promise<ListResult<AbsenResult>>;
 }

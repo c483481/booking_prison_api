@@ -3,9 +3,10 @@ import { AbsenRepository, AppRepositoryMap, NapiRepository } from "../../contrac
 import { AbsenCreation_Payload, AbsenResult } from "../dto/absen.dto";
 import { BaseService } from "./base.service";
 import { errorResponses } from "../../response";
-import { composeResult, createData } from "../../utils/helper.utils";
+import { compose, composeResult, createData } from "../../utils/helper.utils";
 import { AbsenAttrribute, AbsenCreationAttribute } from "../model/absen.model";
 import { AbsenService } from "../../contract/service.contract";
+import { ListResult, List_Payload } from "../../module/dto.module";
 
 export class Absen extends BaseService implements AbsenService {
     private absenRepo!: AbsenRepository;
@@ -38,6 +39,17 @@ export class Absen extends BaseService implements AbsenService {
         const result = await this.absenRepo.insertAbsen(createdValues);
 
         return composeAbsen(result);
+    };
+
+    listAbsen = async (payload: List_Payload): Promise<ListResult<AbsenResult>> => {
+        const result = await this.absenRepo.findAbsen(payload);
+
+        const items = compose(result.rows, composeAbsen);
+
+        return {
+            items,
+            count: result.count,
+        };
     };
 }
 
