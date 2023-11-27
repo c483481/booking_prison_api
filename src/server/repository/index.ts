@@ -3,6 +3,7 @@ import {
     AppRepositoryMap,
     BookingRepository,
     CellRepository,
+    JadwalRepository,
     NapiRepository,
     UsersRepository,
 } from "../../contract/repository.contract";
@@ -11,6 +12,7 @@ import { SequelizeAbsenRepository } from "./absen.reposittory,";
 import { BaseRepository } from "./base.repository";
 import { SequelizeBookingRepository } from "./booking.repository";
 import { SequelizeCellRepository } from "./cell.repository";
+import { MemoryJadwalRepository } from "./jadwal.repository";
 import { SequelizeNapiRepository } from "./napi.repository";
 import { SequelizeUsersRepository } from "./users.repository";
 
@@ -20,6 +22,7 @@ export class Repository implements AppRepositoryMap {
     readonly cell: CellRepository = new SequelizeCellRepository();
     readonly napi: NapiRepository = new SequelizeNapiRepository();
     readonly absen: AbsenRepository = new SequelizeAbsenRepository();
+    readonly jadwal: JadwalRepository = new MemoryJadwalRepository();
 
     init(datasource: AppDataSource) {
         Object.entries(this).forEach(([k, r]) => {

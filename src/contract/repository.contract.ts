@@ -1,4 +1,5 @@
 import { FindResult, List_Payload } from "../module/dto.module";
+import { JadwalAttribute, JadwalHariAttribute } from "../server/dto/jadwal.dto";
 import { AbsenAttrribute, AbsenCreationAttribute } from "../server/model/absen.model";
 import { BookingAttributes, BookingCreationAttributes } from "../server/model/booking.model";
 import { CellAttributes, CellCrationAttributes } from "../server/model/cell.model";
@@ -11,6 +12,7 @@ export interface AppRepositoryMap {
     cell: CellRepository;
     napi: NapiRepository;
     absen: AbsenRepository;
+    jadwal: JadwalRepository;
 }
 
 export interface UsersRepository {
@@ -59,4 +61,10 @@ export interface AbsenRepository {
     insertAbsen(payload: AbsenCreationAttribute): Promise<AbsenAttrribute>;
 
     findAbsen(payload: List_Payload): Promise<FindResult<AbsenAttrribute>>;
+}
+
+export interface JadwalRepository {
+    getJadwal(): JadwalAttribute;
+
+    setJadwal(hari: JadwalHariAttribute, name: string): void;
 }
