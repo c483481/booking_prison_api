@@ -29,12 +29,15 @@ export class Absen extends BaseService implements AbsenService {
             throw errorResponses.getError("E_FOUND_1");
         }
 
-        const createdValues = createData<AbsenCreationAttribute>({
-            name: napi.name,
-            napiXid: xid,
-            cell: napi.cell,
-            tema,
-        });
+        const createdValues = createData<AbsenCreationAttribute>(
+            {
+                name: napi.name,
+                napiXid: xid,
+                cell: napi.cell,
+                tema,
+            },
+            userSession
+        );
 
         const result = await this.absenRepo.insertAbsen(createdValues);
 

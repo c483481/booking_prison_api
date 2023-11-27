@@ -1,5 +1,6 @@
 import { AppRepositoryMap } from "../../contract/repository.contract";
 import {
+    AbsenService,
     AppServiceMap,
     AuthService,
     BookingService,
@@ -7,6 +8,7 @@ import {
     NapiService,
     UsersService,
 } from "../../contract/service.contract";
+import { Absen } from "./absen.service";
 import { Auth } from "./auth.service";
 import { BaseService } from "./base.service";
 import { Booking } from "./booking.service";
@@ -20,6 +22,7 @@ export class Service implements AppServiceMap {
     readonly booking: BookingService = new Booking();
     readonly cell: CellService = new Cell();
     readonly napi: NapiService = new Napi();
+    readonly absen: AbsenService = new Absen();
 
     init(repository: AppRepositoryMap) {
         Object.entries(this).forEach(([k, r]) => {
