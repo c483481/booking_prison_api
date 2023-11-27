@@ -1,4 +1,5 @@
 import { GetDetail_Payload, ListResult, List_Payload, UserSession } from "../module/dto.module";
+import { AbsenCreation_Payload, AbsenResult } from "../server/dto/absen.dto";
 import { AuthLogin_Payload, LoginResult, UsersRegister_Payload } from "../server/dto/auth.dto";
 import { BookingCreation_Payload, BookingResult } from "../server/dto/booking.dto";
 import { CellCreation_Payload, CellResult } from "../server/dto/cell.dto";
@@ -11,6 +12,7 @@ export interface AppServiceMap {
     booking: BookingService;
     cell: CellService;
     napi: NapiService;
+    absen: AbsenService;
 }
 
 export interface AuthService {
@@ -45,4 +47,8 @@ export interface NapiService {
     createNapi(payload: NapiCreation_Payload): Promise<NapiResult>;
 
     listNapi(payload: List_Payload): Promise<ListResult<NapiResult>>;
+}
+
+export interface AbsenService {
+    createAbsen(payload: AbsenCreation_Payload): Promise<AbsenResult>;
 }
